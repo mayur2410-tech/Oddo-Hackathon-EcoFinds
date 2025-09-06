@@ -1,30 +1,48 @@
+// src/pages/Login.jsx
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import {
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  Shield,
-  ArrowRight
-} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../firebase';
+import { ArrowRight, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import loginimg from '../assets/img/loginimg.png';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // ✅ hook for navigation
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log("Logged in user:", user);
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing in:", error.message);
+      alert(error.message);
+    }
+  };
+
+  // ✅ Google Sign-In
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google user:", user);
+      navigate("/");
+    } catch (error) {
+      console.error("Google sign-in error:", error.message);
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="min-h-screen flex">
       {/* Left Panel */}
-      <div className="w-[%] relative overflow-hidden">
-        <img
-          src={loginimg}
-          alt="Marketplace"
-          className="w-full h-full object-cover"
-        />
+      <div className="w-[50%] relative overflow-hidden">
+        <img src={loginimg} alt="Marketplace" className="w-full h-full object-cover" />
       </div>
 
       {/* Right Panel */}
@@ -34,14 +52,7 @@ function Login() {
             Sign in to your account to continue
           </h2>
 
-          {/* ✅ Only one form */}
-          <form
-            className="space-y-6"
-            onSubmit={(e) => {
-              e.preventDefault();
-              navigate("/"); // redirect after login
-            }}
-          >
+          <form className="space-y-6" onSubmit={handleLogin}>
             {/* Email Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -55,6 +66,7 @@ function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors duration-200 outline-none"
+                  required
                 />
               </div>
             </div>
@@ -72,6 +84,7 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors duration-200 outline-none"
+                  required
                 />
                 <button
                   type="button"
@@ -80,11 +93,6 @@ function Login() {
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
-              </div>
-              <div className="text-right mt-2">
-                <a href="#" className="text-sm text-teal-600 hover:text-teal-700 transition-colors duration-200">
-                  Forgot your password?
-                </a>
               </div>
             </div>
 
@@ -96,59 +104,25 @@ function Login() {
               <span>Sign In</span>
               <ArrowRight className="w-5 h-5" />
             </button>
-
-            {/* Divider */}
-            <div className="flex items-center my-6">
-              <div className="flex-1 border-t border-gray-300"></div>
-              <span className="px-4 text-gray-500 text-sm">OR</span>
-              <div className="flex-1 border-t border-gray-300"></div>
-            </div>
-
-            {/* Social Login Buttons */}
-            <div className="space-y-3">
-              <button className="w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">G</span>
-                </div>
-                <span className="text-gray-700">Continue with Google</span>
-              </button>
-
-              <button className="w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                <div className="w-5 h-5 bg-black rounded flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">A</span>
-                </div>
-                <span className="text-gray-700">Continue with Apple</span>
-              </button>
-
-              <button className="w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                <div className="w-5 h-5 bg-blue-600 rounded flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">S</span>
-                </div>
-                <span className="text-gray-700">Sign in with SSO</span>
-              </button>
-            </div>
-
-            {/* Create Account Link */}
-            <p className="text-center text-sm text-gray-600 mt-8">
-              Don't have an account?{' '}
-              <a href="#" className="text-teal-600 hover:text-teal-700 font-semibold transition-colors duration-200">
-                Create Account
-              </a>
-            </p>
-
-            {/* Terms and Security */}
-            <div className="text-center text-xs text-gray-500 space-y-2 mt-6">
-              <p>
-                By signing in, you agree to our{' '}
-                <a href="#" className="text-teal-600 hover:underline">Terms of Service</a> and acknowledge our{' '}
-                <a href="#" className="text-teal-600 hover:underline">Privacy Policy</a>
-              </p>
-              <p className="flex items-center justify-center space-x-1">
-                <Shield className="w-3 h-3 text-green-500" />
-                <span>Your data is protected with enterprise-grade security</span>
-              </p>
-            </div>
           </form>
+
+          {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 border-t border-gray-300"></div>
+            <span className="px-4 text-gray-500 text-sm">OR</span>
+            <div className="flex-1 border-t border-gray-300"></div>
+          </div>
+
+          {/* Google Login Button */}
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+          >
+            <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-xs font-bold">G</span>
+            </div>
+            <span className="text-gray-700">Continue with Google</span>
+          </button>
         </div>
       </div>
     </div>
