@@ -5,6 +5,9 @@ import Login from "./login page/login";
 import Signup from "./Signup page/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import Profile from "./ProfilePage/Profile";
+import MarketPlace from "./MarketPlacce.jsx/MarketPlace";
+
 
 const App = () => {
   return (
@@ -19,6 +22,22 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route 
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+        ></Route>
+         <Route 
+        path="/marketplace"
+        element={
+          <ProtectedRoute>
+            <MarketPlace />
+          </ProtectedRoute>
+        }
+        ></Route>
 
         {/* Public Routes */}
         <Route

@@ -10,7 +10,7 @@ import {
   Package,
   Store,
 } from "lucide-react";
-
+import { Link } from "react-router-dom";
 // ✅ Shadcn UI imports (relative path fix)
 import { Button } from "../../components/ui/button";
 import {
@@ -52,34 +52,39 @@ const Navbar = () => {
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-6 space-y-4">
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                  <Link to="/" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                    <Store className="h-5 w-5" />
+                    <span>Home</span>
+                  </Link>
+                  <div className="border-t border-white/40 my-2"></div> {/* Separator line */}
+                  <Link to="/marketplace" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <Store className="h-5 w-5" />
                     <span>Marketplace</span>
-                  </button>
-<div className="border-t border-white/40 my-2"></div>
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                  </Link>
+                  <div className="border-t border-white/40 my-2"></div>
+                  <Link to="/profile" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <User className="h-5 w-5" />
                     <span>Profile</span>
-                  </button>
+                  </Link>
 
                   <div className="border-t border-white/40 my-2"></div> {/* Separator line */}
 
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                  <Link to="/cart" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <ShoppingCart className="h-5 w-5" />
                     <span>Cart</span>
-                  </button>
-<div className="border-t border-white/40 my-2"></div>
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                  </Link>
+                  <div className="border-t border-white/40 my-2"></div>
+                  <Link to="/wishlist" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <Heart className="h-5 w-5" />
                     <span>Wishlist</span>
-                  </button>
+                  </Link>
 
                   <div className="border-t border-white/40 my-2"></div> {/* Separator line */}
 
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                  <Link to="/orders" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <Package className="h-5 w-5" />
                     <span>Orders</span>
-                  </button>
+                  </Link>
                 </div>
               </SheetContent>
             </Sheet>
