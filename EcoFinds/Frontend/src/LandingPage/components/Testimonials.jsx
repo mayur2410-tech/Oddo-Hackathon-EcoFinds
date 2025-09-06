@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star,Shield, Quote } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 const Testimonials = () => {
   const testimonials = [
@@ -9,7 +9,6 @@ const Testimonials = () => {
       role: 'Frequent Buyer',
       avatar: 'SM',
       rating: 5,
-      reviews: 124,
       text: 'I found an amazing vintage desk at just $750 that would have cost thousands at traditional stores. The seller was incredibly helpful, and the quality exceeded my expectations. TrustMarket has become my go-to platform for unique finds.',
       highlight: 'Found vintage desk for $750'
     },
@@ -19,7 +18,6 @@ const Testimonials = () => {
       role: 'Power Seller',
       avatar: 'MC',
       rating: 5,
-      reviews: 89,
       text: 'As a seller, TrustMarket has revolutionized my business. The platform makes it easy to reach customers, the payment system is seamless, and the support team is always there when I need help. I\'ve sold over 200 items this year alone!',
       highlight: 'Sold 200+ items this year'
     },
@@ -29,33 +27,8 @@ const Testimonials = () => {
       role: 'Art Collector',
       avatar: 'JR',
       rating: 5,
-      reviews: 156,
       text: 'The buyer protection gave me confidence to make larger purchases. When I bought a $2,000 painting, everything was handled professionally from verification to secure delivery. The seller was verified and the transaction was flawless.',
       highlight: 'Secure $2,000 art purchase'
-    }
-  ];
-
-  const sellerStats = [
-    {
-      name: 'Sarah Martinez',
-      image: 'SM',
-      sales: '1.1k',
-      rating: 4.9,
-      reviews: 234
-    },
-    {
-      name: 'Michael Chen',
-      image: 'MC',
-      sales: '892',
-      rating: 4.8,
-      reviews: 178
-    },
-    {
-      name: 'Jessica Rodriguez',
-      image: 'JR',
-      sales: '756',
-      rating: 4.9,
-      reviews: 145
     }
   ];
 
@@ -73,7 +46,7 @@ const Testimonials = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
@@ -93,9 +66,6 @@ const Testimonials = () => {
                     }`}
                   />
                 ))}
-                <span className="ml-2 text-sm text-gray-600">
-                  {testimonial.rating}.0 ({testimonial.reviews} reviews)
-                </span>
               </div>
 
               {/* Testimonial Text */}
@@ -104,7 +74,7 @@ const Testimonials = () => {
               </blockquote>
 
               {/* User Info */}
-              <div className="flex items-center">
+              <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-semibold mr-4">
                   {testimonial.avatar}
                 </div>
@@ -115,103 +85,39 @@ const Testimonials = () => {
               </div>
 
               {/* Highlight Badge */}
-              <div className="mt-4 inline-block bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-medium">
+              <div className="inline-block bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-medium">
                 ✨ {testimonial.highlight}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Top Sellers Section */}
-        <div className="bg-white rounded-3xl p-8 shadow-lg">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Top Sellers This Month
-            </h3>
-            <p className="text-gray-600">
-              Meet our most successful community members
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {sellerStats.map((seller, index) => (
-              <div
-                key={index}
-                className="text-center group hover:transform hover:scale-105 transition-all duration-300"
-              >
-                <div className="relative inline-block mb-4">
-                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                    {seller.image}
-                  </div>
-                  {index === 0 && (
-                    <div className="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-xs px-2 py-1 rounded-full font-bold">
-                      #1
-                    </div>
-                  )}
-                </div>
-                
-                <h4 className="font-semibold text-gray-900 mb-2">{seller.name}</h4>
-                
-                <div className="flex items-center justify-center mb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-4 w-4 ${
-                        i < Math.floor(seller.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                  <span className="ml-1 text-sm text-gray-600">
-                    {seller.rating} ({seller.reviews} reviews)
-                  </span>
-                </div>
-                
-                <div className="text-emerald-600 font-semibold">
-                  {seller.sales} Sales • Member since 2019
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">
-            Shop with Confidence
+        {/* Join Community CTA */}
+        <div className="mt-16 text-center bg-gradient-to-r from-emerald-50 to-orange-50 rounded-3xl p-12">
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            Join Our Growing Community
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-                <Shield className="h-8 w-8 text-emerald-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Buyer Protection</h4>
-              <p className="text-gray-600 text-sm text-center">Money back guarantee if your purchase doesn't match the description</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-emerald-600 mb-2">250K+</div>
+              <div className="text-gray-700">Active Users</div>
             </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Star className="h-8 w-8 text-blue-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Verified Sellers</h4>
-              <p className="text-gray-600 text-sm text-center">All sellers go through identity verification and background checks</p>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-emerald-600 mb-2">1.2M+</div>
+              <div className="text-gray-700">Products Sold</div>
             </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                <Quote className="h-8 w-8 text-purple-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Secure Payments</h4>
-              <p className="text-gray-600 text-sm text-center">Advanced encryption protects your payment information</p>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-emerald-600 mb-2">98%</div>
+              <div className="text-gray-700">Satisfaction Rate</div>
             </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                <Star className="h-8 w-8 text-orange-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">24/7 Support</h4>
-              <p className="text-gray-600 text-sm text-center">Our customer service team is always ready to help</p>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-emerald-600 mb-2">$50M+</div>
+              <div className="text-gray-700">Total Sales</div>
             </div>
           </div>
+          <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200 transform hover:scale-105">
+            Start Selling Today
+          </button>
         </div>
       </div>
     </section>

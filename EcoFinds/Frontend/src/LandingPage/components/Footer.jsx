@@ -48,21 +48,44 @@ const Footer = () => {
     }
   ];
 
-  const categories = [
-    'Electronics', 'Fashion', 'Home & Garden', 'Sports & Outdoors',
-    'Books & Media', 'Toys & Games', 'Health & Beauty', 'Automotive'
-  ];
-
   return (
     <footer className="bg-slate-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile App Section */}
+        <div className="py-12 border-b border-gray-700">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold mb-4">Take TrustMarket Everywhere</h3>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Download our mobile app for the best marketplace experience on the go.
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="flex items-center bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl transition-colors duration-200">
+              <Apple className="h-8 w-8 mr-3" />
+              <div className="text-left">
+                <div className="text-xs">Download on the</div>
+                <div className="text-lg font-semibold">App Store</div>
+              </div>
+            </button>
+            
+            <button className="flex items-center bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl transition-colors duration-200">
+              <Play className="h-8 w-8 mr-3" />
+              <div className="text-left">
+                <div className="text-xs">Get it on</div>
+                <div className="text-lg font-semibold">Google Play</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
         {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Company Info */}
             <div className="lg:col-span-1">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-orange-400 bg-clip-text text-transparent">
                   TrustMarket
                 </h2>
                 <p className="text-gray-300 mt-4 leading-relaxed">
@@ -71,7 +94,7 @@ const Footer = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="space-y-3">
+              <div className="space-y-3 mb-8">
                 <div className="flex items-center text-gray-300">
                   <MapPin className="h-5 w-5 mr-3 text-emerald-400" />
                   <span className="text-sm">123 Market Street, San Francisco, CA 94102</span>
@@ -87,7 +110,7 @@ const Footer = () => {
               </div>
 
               {/* Social Links */}
-              <div className="mt-8">
+              <div>
                 <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
                 <div className="flex space-x-4">
                   {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
@@ -123,49 +146,6 @@ const Footer = () => {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Mobile App Section */}
-        <div className="border-t border-gray-700 py-12">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4">Take TrustMarket Everywhere</h3>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              Download our mobile app for the best marketplace experience on the go.
-            </p>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="flex items-center bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl transition-colors duration-200">
-              <Apple className="h-8 w-8 mr-3" />
-              <div className="text-left">
-                <div className="text-xs">Download on the</div>
-                <div className="text-lg font-semibold">App Store</div>
-              </div>
-            </button>
-            
-            <button className="flex items-center bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl transition-colors duration-200">
-              <Play className="h-8 w-8 mr-3" />
-              <div className="text-left">
-                <div className="text-xs">Get it on</div>
-                <div className="text-lg font-semibold">Google Play</div>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Categories */}
-        <div className="border-t border-gray-700 py-8">
-          <h3 className="text-lg font-semibold mb-4 text-center">Popular Categories</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category, index) => (
-              <button
-                key={index}
-                className="text-gray-300 hover:text-emerald-400 text-sm transition-colors duration-200"
-              >
-                {category}
-              </button>
-            ))}
           </div>
         </div>
 
