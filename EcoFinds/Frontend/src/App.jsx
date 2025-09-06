@@ -8,6 +8,7 @@ import PublicRoute from "./components/PublicRoute";
 import Profile from "./ProfilePage/Profile";
 import MarketPlace from "./MarketPlacce.jsx/MarketPlace";
 import AddNewProduct from "./AddNewProduct/ProductListingForm"
+import Order from "./order/Order";
 
 
 const App = () => {
@@ -63,6 +64,14 @@ const App = () => {
             <PublicRoute>
               <Signup />
             </PublicRoute>
+          }
+        />
+                <Route
+          path="/order"
+          element={
+            <ProtectedRoute>
+              <Order />
+            </ProtectedRoute>
           }
         />
       </Routes>

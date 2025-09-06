@@ -94,7 +94,7 @@ const Navbar = () => {
                     <span>Cart</span>
                   </Link>
                   <div className="border-t border-white/40 my-2"></div>
-                  <Link to="/add-new-product" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                  <Link to="/add-product" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <Package2 className="h-5 w-5" />
                     <span>Add New Product</span>
                   </Link>
