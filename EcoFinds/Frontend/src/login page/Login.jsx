@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
-import { 
-  ShoppingBag, 
-  Mail, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  Shield, 
-  Zap, 
-  Globe,
+import { useNavigate } from "react-router-dom";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Shield,
   ArrowRight
 } from 'lucide-react';
 import loginimg from '../assets/img/loginimg.png';
 
-function login() {
+function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // ✅ hook for navigation
 
   return (
     <div className="min-h-screen flex">
       {/* Left Panel */}
-      <div className="w-[50%] relative overflow-hidden">
-        <img 
+      <div className="w-[%] relative overflow-hidden">
+        <img
           src={loginimg}
-          alt="Marketplace" 
+          alt="Marketplace"
           className="w-full h-full object-cover"
         />
       </div>
@@ -35,7 +34,14 @@ function login() {
             Sign in to your account to continue
           </h2>
 
-          <form className="space-y-6">
+          {/* ✅ Only one form */}
+          <form
+            className="space-y-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate("/"); // redirect after login
+            }}
+          >
             {/* Email Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -106,14 +112,14 @@ function login() {
                 </div>
                 <span className="text-gray-700">Continue with Google</span>
               </button>
-              
+
               <button className="w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
                 <div className="w-5 h-5 bg-black rounded flex items-center justify-center">
                   <span className="text-white text-xs font-bold">A</span>
                 </div>
                 <span className="text-gray-700">Continue with Apple</span>
               </button>
-              
+
               <button className="w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
                 <div className="w-5 h-5 bg-blue-600 rounded flex items-center justify-center">
                   <span className="text-white text-xs font-bold">S</span>
@@ -149,4 +155,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
