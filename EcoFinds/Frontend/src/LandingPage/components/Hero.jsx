@@ -1,16 +1,16 @@
 import React from 'react';
-import { Package2, Smartphone, BookOpen, Car, Camera, ShoppingBag, Music, Star } from 'lucide-react';
+import { Package2, Smartphone, BookOpen, Car, Camera, ShoppingBag, Music, Star, Heart, Grid3X3 } from 'lucide-react';
 
 const Hero = () => {
   const categories = [
-    { name: 'Essentials', icon: Package2, active: false },
-    { name: 'Electronics', icon: Smartphone, active: true },
-    { name: 'Fashion', icon: ShoppingBag, active: false },
-    { name: 'Vehicles', icon: Car, active: false },
-    { name: 'Home & Garden', icon: Star, active: false },
-    { name: 'Sports', icon: Music, active: false },
-    { name: 'Books', icon: BookOpen, active: false },
-    { name: 'Arts & Baby', icon: Camera, active: false }
+    { name: 'Essentials', icon: Package2, active: true, color: 'bg-emerald-100 text-emerald-700' },
+    { name: 'Electronics', icon: Smartphone, active: false, color: 'bg-blue-100 text-blue-700' },
+    { name: 'Fashion', icon: ShoppingBag, active: false, color: 'bg-pink-100 text-pink-700' },
+    { name: 'Vehicles', icon: Car, active: false, color: 'bg-purple-100 text-purple-700' },
+    { name: 'Home & Garden', icon: Star, active: false, color: 'bg-yellow-100 text-yellow-700' },
+    { name: 'Sports', icon: Music, active: false, color: 'bg-orange-100 text-orange-700' },
+    { name: 'Books', icon: BookOpen, active: false, color: 'bg-indigo-100 text-indigo-700' },
+    { name: 'Arts & Baby', icon: Camera, active: false, color: 'bg-red-100 text-red-700' }
   ];
 
   const featuredDeals = [
@@ -46,6 +46,57 @@ const Hero = () => {
     }
   ];
 
+  const latestListings = [
+    {
+      id: 1,
+      title: 'Modern Sectional Sofa',
+      price: '$450',
+      originalPrice: '$650',
+      location: 'San Francisco',
+      rating: 4.8,
+      reviews: 24,
+      image: 'https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=300',
+      seller: 'John D.',
+      time: '2 hours ago'
+    },
+    {
+      id: 2,
+      title: 'iPhone 14 Pro - 256GB',
+      price: '$899',
+      originalPrice: '$1,099',
+      location: 'New York',
+      rating: 4.9,
+      reviews: 18,
+      image: 'https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=300',
+      seller: 'Sarah M.',
+      time: '4 hours ago'
+    },
+    {
+      id: 3,
+      title: 'Vintage Dining Set',
+      price: '$650',
+      originalPrice: '$850',
+      location: 'Los Angeles',
+      rating: 4.7,
+      reviews: 31,
+      image: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=300',
+      seller: 'Mike R.',
+      time: '6 hours ago'
+    },
+    {
+      id: 4,
+      title: 'Electric Mountain Bike',
+      price: '$1,200',
+      originalPrice: '$1,500',
+      location: 'Seattle',
+      rating: 4.9,
+      reviews: 12,
+      image: 'https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=300',
+      seller: 'Lisa K.',
+      time: '8 hours ago'
+    }
+  ];
+
   return (
     <div className="bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -71,7 +122,7 @@ const Hero = () => {
                   className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-200 ${
                     category.active
                       ? 'bg-emerald-500 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border border-gray-300 hover:border-emerald-400 hover:text-emerald-600'
+                      : `${category.color} hover:shadow-md`
                   }`}
                 >
                   <IconComponent className="h-4 w-4" />
@@ -109,8 +160,74 @@ const Hero = () => {
           </div>
         </div>
 
+        {/* Latest Listings */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Latest Listings</h2>
+            <div className="flex items-center space-x-4">
+              <select className="border border-gray-300 rounded-lg px-3 py-1 text-sm">
+                <option>Sort by: Newest</option>
+                <option>Sort by: Price Low to High</option>
+                <option>Sort by: Price High to Low</option>
+                <option>Sort by: Distance</option>
+              </select>
+              <div className="flex space-x-2">
+                <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <Grid3X3 className="h-4 w-4" />
+                </button>
+                <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <Package2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {latestListings.map((item) => (
+              <div key={item.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors">
+                    <Heart className="h-4 w-4 text-gray-600" />
+                  </button>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{item.title}</h3>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <span className="text-lg font-bold text-emerald-600">{item.price}</span>
+                    {item.originalPrice && (
+                      <span className="text-sm text-gray-500 line-through">{item.originalPrice}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center space-x-1 mb-2">
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <span className="text-sm text-gray-600">{item.rating}</span>
+                    <span className="text-sm text-gray-500">({item.reviews})</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm text-gray-500">
+                    <span>{item.seller}</span>
+                    <span>{item.time}</span>
+                  </div>
+                  <div className="text-sm text-gray-500 mt-1">{item.location}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Load More Button */}
+        <div className="text-center mb-8">
+          <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
+            Load More Listings
+          </button>
+        </div>
+
         {/* CTA Section */}
-        <div className="text-center bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-8">
+        <div className="text-center bg-gradient-to-r from-emerald-50 to-orange-50 rounded-2xl p-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Join Our Growing Community
           </h2>

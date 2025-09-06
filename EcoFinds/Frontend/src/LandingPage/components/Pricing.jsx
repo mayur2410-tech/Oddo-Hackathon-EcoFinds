@@ -70,15 +70,6 @@ const Pricing = () => {
     }
   ];
 
-  const additionalBenefits = [
-    'No setup fees or hidden charges',
-    'Cancel anytime with 30-day money-back guarantee',
-    'Free migration assistance from other platforms',
-    'Access to seller education resources',
-    '99.9% uptime guarantee',
-    'SSL security and data protection'
-  ];
-
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -194,24 +185,9 @@ const Pricing = () => {
           })}
         </div>
 
-        {/* Additional Benefits */}
+        {/* FAQ Section */}
         <div className="bg-gray-50 rounded-3xl p-8">
           <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            Why Choose TrustMarket?
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {additionalBenefits.map((benefit, index) => (
-              <div key={index} className="flex items-center">
-                <Check className="h-5 w-5 text-emerald-500 mr-3 flex-shrink-0" />
-                <span className="text-gray-700">{benefit}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">
             Frequently Asked Questions
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
