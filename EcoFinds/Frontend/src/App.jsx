@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import Profile from "./ProfilePage/Profile";
 import MarketPlace from "./MarketPlacce.jsx/MarketPlace";
+import AddNewProduct from "./AddNewProduct/ProductListingForm"
 
 
 const App = () => {
@@ -35,6 +36,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <MarketPlace />
+          </ProtectedRoute>
+        }
+        ></Route>
+        <Route 
+        path="/add-product"
+        element={
+          <ProtectedRoute>
+            <AddNewProduct />
           </ProtectedRoute>
         }
         ></Route>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Search,
   ShoppingCart,
+  Package2,
   User,
   Bell,
   Menu,
@@ -91,6 +92,11 @@ const Navbar = () => {
                   <Link to="/cart" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
                     <ShoppingCart className="h-5 w-5" />
                     <span>Cart</span>
+                  </Link>
+                  <div className="border-t border-white/40 my-2"></div>
+                  <Link to="/add-new-product" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
+                    <Package2 className="h-5 w-5" />
+                    <span>Add New Product</span>
                   </Link>
                   <div className="border-t border-white/40 my-2"></div>
                   <Link to="/wishlist" className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
