@@ -99,7 +99,7 @@ function Login() {
             {/* Sign In Button */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-teal-500 to-orange-500 text-white py-3 rounded-lg font-semibold hover:from-teal-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 shadow-lg"
+              className="w-full bg-gradient-to-r from-teal-500 bg-emerald-500 text-white py-3 rounded-lg font-semibold hover:from-teal-600 transition-all duration-200 flex items-center justify-center space-x-2 shadow-lg"
             >
               <span>Sign In</span>
               <ArrowRight className="w-5 h-5" />
