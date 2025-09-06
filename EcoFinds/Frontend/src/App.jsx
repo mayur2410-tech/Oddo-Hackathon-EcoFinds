@@ -5,6 +5,7 @@ import Login from "./login page/login";
 import Signup from "./Signup page/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import Profile from "./ProfilePage/Profile";
 
 const App = () => {
   return (
@@ -19,6 +20,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route 
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+        ></Route>
 
         {/* Public Routes */}
         <Route
