@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useState } from "react"
+import { auth } from "../firebase"
+import { onAuthStateChanged } from "firebase/auth"
+import { useEffect, useState } from "react"
 import Navbar from "../LandingPage/components/Navbar"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
@@ -12,7 +14,7 @@ import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
-    X,
+  X,
   Edit,
   Eye,
   Users,
@@ -26,12 +28,15 @@ import {
 } from "lucide-react"
 
 export default function Profile() {
+  const [user, setUser] = useState(null)
   const [isEditing, setIsEditing] = useState({})
+  const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
   const [profileData, setProfileData] = useState({
-    name: "Sarah Johnson",
+    name: "",
     title: "Community Manager since March 2023",
     location: "New York",
-    email: "sarah.johnson@example.com",
+    email: "",
     phone: "+1 (555) 123-4567",
     dateOfBirth: "March 16, 1990",
     address: "123 Main Street, Apt 4B",
@@ -87,20 +92,78 @@ export default function Profile() {
     { type: "login", action: "Signed in from Chrome on Windows", time: "5 days ago", icon: "💻" },
   ])
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser({
+          name: currentUser.displayName || "No Name",
+          email: currentUser.email,
+          photoURL: currentUser.photoURL || "/default-avatar.png",
+        })
+        setProfileData((prev) => ({
+          ...prev,
+          name: currentUser.displayName || "No Name",
+          email: currentUser.email,
+        }))
+      } else {
+        setUser(null)
+      }
+      setIsLoading(false)
+    })
+
+    return () => unsubscribe()
+  }, [])
+
+  const validateField = (field, value) => {
+    const errors = {}
+    if (field === "name" && !value.trim()) errors.name = "Name is required"
+    if (field === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) errors.email = "Invalid email format"
+    if (field === "phone" && !/^\+?\d{10,15}$/.test(value.replace(/\s/g, ""))) errors.phone = "Invalid phone number"
+    if (field === "dateOfBirth" && !/^\d{4}-\d{2}-\d{2}$/.test(value)) errors.dateOfBirth = "Invalid date format (YYYY-MM-DD)"
+    if (field === "zipCode" && !/^\d{5}(-\d{4})?$/.test(value)) errors.zipCode = "Invalid ZIP code"
+    return errors
+  }
+
   const handleEdit = (section) => {
     setIsEditing((prev) => ({ ...prev, [section]: !prev[section] }))
+    if (isEditing[section]) {
+      setErrors((prev) => ({ ...prev, [section]: null }))
+    }
   }
 
   const handleSave = (section) => {
+    const sectionFields = {
+      personal: ["name", "email", "phone", "dateOfBirth"],
+      location: ["address", "city", "zipCode"],
+      professional: ["jobTitle", "company", "department", "yearsOfExperience", "workLocation", "bio"],
+      social: Object.keys(socialLinks),
+    }
+
+    const fieldsToValidate = sectionFields[section] || []
+    const newErrors = {}
+    fieldsToValidate.forEach((field) => {
+      const fieldErrors = validateField(field, profileData[field] || socialLinks[field] || "")
+      Object.assign(newErrors, fieldErrors)
+    })
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
     setIsEditing((prev) => ({ ...prev, [section]: false }))
+    setErrors({})
+    alert(`${section.charAt(0).toUpperCase() + section.slice(1)} section saved successfully!`)
   }
 
   const handleInputChange = (field, value) => {
     setProfileData((prev) => ({ ...prev, [field]: value }))
+    setErrors((prev) => ({ ...prev, [field]: null }))
   }
 
   const handleSocialLinkChange = (platform, value) => {
     setSocialLinks((prev) => ({ ...prev, [platform]: value }))
+    setErrors((prev) => ({ ...prev, [platform]: null }))
   }
 
   const togglePreference = (key) => {
@@ -109,6 +172,28 @@ export default function Profile() {
 
   const toggleSecurity = (key) => {
     setSecurity((prev) => ({ ...prev, [key]: !prev[key] }))
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-xl text-gray-600">Loading...</div>
+      </div>
+    )
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <Card className="p-6 shadow-lg rounded-2xl">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Please Sign In</h2>
+          <p className="text-gray-600 mb-6">You need to be logged in to view your profile.</p>
+          <Button as={Link} to="/login" className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
+            Sign In
+          </Button>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -120,11 +205,11 @@ export default function Profile() {
           <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <Avatar className="w-24 h-24 border-4 border-white shadow-md">
-                <AvatarImage src="/professional-woman-diverse.png" />
-                <AvatarFallback>SJ</AvatarFallback>
+                <AvatarImage src={user.photoURL} />
+                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-3xl font-bold">{profileData.name}</h1>
+                <h1 className="text-3xl font-bold">{user.name}</h1>
                 <p className="text-white/90 text-lg mt-1">{profileData.title}</p>
               </div>
             </div>
@@ -147,7 +232,7 @@ export default function Profile() {
               { icon: FileText, label: "Posts", value: stats.posts },
               { icon: Award, label: "Achievements", value: stats.achievements },
             ].map((stat, index) => (
-              <div key={index} className="text-center bg-white/10 p-4 rounded-lg">
+              <div key={index} className="text-center bg-white/10 p-4 rounded-lg hover:bg-white/20 transition-colors">
                 <div className="flex items-center justify-center space-x-2">
                   <stat.icon className="w-6 h-6 text-emerald-200" />
                   <span className="text-2xl font-bold">{stat.value}</span>
@@ -192,10 +277,12 @@ export default function Profile() {
                         value={profileData[item.field]}
                         onChange={(e) => handleInputChange(item.field, e.target.value)}
                         className="mt-1 focus:ring-emerald-500 focus:border-emerald-500"
+                        disabled={item.field === "email" && user.email} // Prevent editing Firebase email
                       />
                     ) : (
                       <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                     )}
+                    {errors[item.field] && <p className="text-red-500 text-sm mt-1">{errors[item.field]}</p>}
                   </div>
                 ))}
               </div>
@@ -232,6 +319,7 @@ export default function Profile() {
                   ) : (
                     <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                   )}
+                  {errors[item.field] && <p className="text-red-500 text-sm mt-1">{errors[item.field]}</p>}
                 </div>
               ))}
             </div>
@@ -322,6 +410,7 @@ export default function Profile() {
                   ) : (
                     <p className="text-sm text-gray-600 truncate">{url}</p>
                   )}
+                  {errors[platform] && <p className="text-red-500 text-sm mt-1">{errors[platform]}</p>}
                 </div>
               </div>
             ))}
@@ -364,6 +453,7 @@ export default function Profile() {
                   ) : (
                     <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                   )}
+                  {errors[item.field] && <p className="text-red-500 text-sm mt-1">{errors[item.field]}</p>}
                 </div>
               ))}
             </div>
@@ -383,6 +473,7 @@ export default function Profile() {
                   ) : (
                     <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                   )}
+                  {errors[item.field] && <p className="text-red-500 text-sm mt-1">{errors[item.field]}</p>}
                 </div>
               ))}
               <div>
@@ -397,6 +488,7 @@ export default function Profile() {
                 ) : (
                   <p className="text-sm text-gray-700 mt-1 leading-relaxed">{profileData.bio}</p>
                 )}
+                {errors.bio && <p className="text-red-500 text-sm mt-1">{errors.bio}</p>}
               </div>
             </div>
           </div>
@@ -544,7 +636,7 @@ export default function Profile() {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap justify-center gap-4 pt-6">
-          <Button className=" bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
+          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
             <Save className="w-4 h-4 mr-2" />
             Save All Changes
           </Button>
@@ -592,7 +684,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-6 pt-4 text-center text-sm text-gray-300">
-            © 2024 ProfileHub. All rights reserved.
+            © 2025 ProfileHub. All rights reserved.
           </div>
         </div>
       </div>
