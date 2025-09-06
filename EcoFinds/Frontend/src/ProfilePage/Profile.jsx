@@ -1,28 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import {
-  Search,
-  ShoppingCart,
-  User,
-  Bell,
-  Menu,
-  X,
-  Heart,
-  Package,
-  Store,
-  Edit,
-  Eye,
-  Users,
-  FileText,
-  Award,
-  Shield,
-  Activity,
-  Save,
-  Download,
-  Upload,
-  
-} from "lucide-react"
+import Navbar from "../LandingPage/components/Navbar"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -33,177 +12,18 @@ import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-
-  const handleSearch = (e) => {
-    e.preventDefault()
-    console.log("Searching for:", searchQuery)
-  }
-
-  return (
-    <nav className="bg-gradient-to-r from-emerald-400 to-emerald-500 w-full">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-3">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:bg-white/20 rounded-full"
-                >
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64 bg-emerald-500 text-white">
-                <SheetHeader>
-                  <SheetTitle className="text-lg font-semibold text-white">
-                    EcoFind Menu
-                  </SheetTitle>
-                </SheetHeader>
-                <div className="mt-6 space-y-4">
-                  <Link
-                    to="/"
-                    className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left"
-                  >
-                    <Store className="h-5 w-5" />
-                    <span>Marketplace</span>
-                  </Link>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <Link
-                    to="/profile"
-                    className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left"
-                  >
-                    <User className="h-5 w-5" />
-                    <span>Profile</span>
-                  </Link>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <Link
-                    to="/cart"
-                    className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left"
-                  >
-                    <ShoppingCart className="h-5 w-5" />
-                    <span>Cart</span>
-                  </Link>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <Link
-                    to="/wishlist"
-                    className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left"
-                  >
-                    <Heart className="h-5 w-5" />
-                    <span>Wishlist</span>
-                  </Link>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <Link
-                    to="/orders"
-                    className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left"
-                  >
-                    <Package className="h-5 w-5" />
-                    <span>Orders</span>
-                  </Link>
-                </div>
-              </SheetContent>
-            </Sheet>
-            <h1 className="text-white text-2xl font-bold">EcoFind</h1>
-          </div>
-          <div className="hidden md:block flex-1 max-w-2xl mx-8">
-            <form onSubmit={handleSearch} className="relative">
-              <input
-                type="text"
-                placeholder="Search for apps - toys, gifts, idea, people"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 pr-12 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-emerald-300 text-gray-700"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white px-4 py-1.5 rounded-full transition-colors duration-200 hover:bg-emerald-700"
-              >
-                <Search className="h-4 w-4" />
-              </button>
-            </form>
-          </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="text-white hover:text-emerald-100 transition-colors duration-200 relative">
-              <Bell className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                3
-              </span>
-            </button>
-            <button className="text-white hover:text-emerald-100 transition-colors duration-200 relative">
-              <ShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                2
-              </span>
-            </button>
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
-              <User className="h-5 w-5 text-white" />
-              <span className="text-white text-sm">Profile</span>
-            </div>
-          </div>
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white hover:text-emerald-100 transition-colors duration-200"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-        <div className="md:hidden pb-4">
-          <form onSubmit={handleSearch} className="relative">
-            <input
-              type="text"
-              placeholder="Search for apps - toys, gifts, idea, people"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 pr-12 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-emerald-300 text-gray-700"
-            />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white px-4 py-1.5 rounded-full transition-colors duration-200 hover:bg-emerald-700"
-            >
-              <Search className="h-4 w-4" />
-            </button>
-          </form>
-        </div>
-        {isMenuOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
-              <button className="flex items-center space-x-2 text-white hover:text-emerald-100 transition-colors duration-200">
-                <Bell className="h-5 w-5" />
-                <span>Notifications</span>
-                <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  3
-                </span>
-              </button>
-              <button className="flex items-center space-x-2 text-white hover:text-emerald-100 transition-colors duration-200">
-                <ShoppingCart className="h-5 w-5" />
-                <span>Cart</span>
-                <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  2
-                </span>
-              </button>
-              <button className="flex items-center space-x-2 text-white hover:text-emerald-100 transition-colors duration-200">
-                <User className="h-5 w-5" />
-                <span>Profile</span>
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
-  )
-}
+    X,
+  Edit,
+  Eye,
+  Users,
+  FileText,
+  Award,
+  Shield,
+  Activity,
+  Save,
+  Download,
+  Upload,
+} from "lucide-react"
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState({})
@@ -292,11 +112,11 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       <Navbar />
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Header */}
-        <Card className="p-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white shadow-lg rounded-xl">
+        <Card className="p-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-xl rounded-2xl">
           <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <Avatar className="w-24 h-24 border-4 border-white shadow-md">
@@ -305,34 +125,34 @@ export default function Profile() {
               </Avatar>
               <div>
                 <h1 className="text-3xl font-bold">{profileData.name}</h1>
-                <p className="text-white/90 text-lg">{profileData.title}</p>
+                <p className="text-white/90 text-lg mt-1">{profileData.title}</p>
               </div>
             </div>
             <div className="flex space-x-3 mt-4 sm:mt-0">
-              <Button variant="secondary" size="sm" className="bg-white/20 hover:bg-white/30 text-white">
+              <Button variant="secondary" size="sm" className="bg-white/20 hover:bg-white/30 text-white font-semibold">
                 <Download className="w-4 h-4 mr-2" />
                 Export Data
               </Button>
-              <Button variant="secondary" size="sm" className="bg-white/20 hover:bg-white/30 text-white">
+              <Button variant="secondary" size="sm" className="bg-white/20 hover:bg-white/30 text-white font-semibold">
                 Share Profile
               </Button>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
               { icon: Eye, label: "Profile Views", value: stats.profileViews.toLocaleString() },
               { icon: Users, label: "Connections", value: stats.connections },
               { icon: FileText, label: "Posts", value: stats.posts },
               { icon: Award, label: "Achievements", value: stats.achievements },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center bg-white/10 p-4 rounded-lg">
                 <div className="flex items-center justify-center space-x-2">
-                  <stat.icon className="w-5 h-5" />
+                  <stat.icon className="w-6 h-6 text-emerald-200" />
                   <span className="text-2xl font-bold">{stat.value}</span>
                 </div>
-                <p className="text-white/80 text-sm">{stat.label}</p>
+                <p className="text-white/80 text-sm mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -340,11 +160,11 @@ export default function Profile() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Personal Information */}
-          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+            <div className="flex items-center justify-between mb-5">
               <h2 className="text-xl font-semibold flex items-center">
-                <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                  <span className="text-white text-xs">👤</span>
+                <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                  <span className="text-white text-sm">👤</span>
                 </div>
                 Personal Information
               </h2>
@@ -352,7 +172,7 @@ export default function Profile() {
                 variant="outline"
                 size="sm"
                 onClick={() => (isEditing.personal ? handleSave("personal") : handleEdit("personal"))}
-                className="hover:bg-emerald-50"
+                className="hover:bg-emerald-50 text-emerald-600 border-emerald-200"
               >
                 {isEditing.personal ? <Save className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
               </Button>
@@ -366,7 +186,7 @@ export default function Profile() {
                   { label: "Date of Birth", field: "dateOfBirth" },
                 ].map((item, index) => (
                   <div key={index}>
-                    <label className="text-sm text-gray-600">{item.label}</label>
+                    <label className="text-sm text-gray-600 font-medium">{item.label}</label>
                     {isEditing.personal ? (
                       <Input
                         value={profileData[item.field]}
@@ -374,7 +194,7 @@ export default function Profile() {
                         className="mt-1 focus:ring-emerald-500 focus:border-emerald-500"
                       />
                     ) : (
-                      <p className="font-medium">{profileData[item.field]}</p>
+                      <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                     )}
                   </div>
                 ))}
@@ -383,14 +203,14 @@ export default function Profile() {
           </Card>
 
           {/* Location & Contact */}
-          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+            <div className="flex items-center justify-between mb-5">
               <h2 className="text-xl font-semibold">Location & Contact</h2>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => (isEditing.location ? handleSave("location") : handleEdit("location"))}
-                className="hover:bg-emerald-50"
+                className="hover:bg-emerald-50 text-emerald-600 border-emerald-200"
               >
                 {isEditing.location ? <Save className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
               </Button>
@@ -402,7 +222,7 @@ export default function Profile() {
                 { label: "ZIP/Postal Code", field: "zipCode" },
               ].map((item, index) => (
                 <div key={index} className={item.field === "address" ? "" : "sm:w-1/2"}>
-                  <label className="text-sm text-gray-600">{item.label}</label>
+                  <label className="text-sm text-gray-600 font-medium">{item.label}</label>
                   {isEditing.location ? (
                     <Input
                       value={profileData[item.field]}
@@ -410,7 +230,7 @@ export default function Profile() {
                       className="mt-1 focus:ring-emerald-500 focus:border-emerald-500"
                     />
                   ) : (
-                    <p className="font-medium">{profileData[item.field]}</p>
+                    <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                   )}
                 </div>
               ))}
@@ -419,34 +239,34 @@ export default function Profile() {
         </div>
 
         {/* Preferences & Interests */}
-        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+          <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                <span className="text-white text-xs">⚙️</span>
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                <span className="text-white text-sm">⚙️</span>
               </div>
               Preferences & Interests
             </h2>
-            <Button variant="outline" size="sm" className="hover:bg-emerald-50">
+            <Button variant="outline" size="sm" className="hover:bg-emerald-50 text-emerald-600 border-emerald-200">
               Edit Profile
             </Button>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium mb-3">Preferred Categories</h3>
+              <h3 className="font-semibold text-base mb-4">Preferred Categories</h3>
               <div className="flex flex-wrap gap-2">
                 {preferences.categories.map((category, index) => (
-                  <Badge key={index} variant="secondary" className="bg-emerald-100 text-emerald-800">
+                  <Badge key={index} variant="secondary" className="bg-emerald-100 text-emerald-800 font-medium">
                     {category}
                   </Badge>
                 ))}
-                <Button variant="outline" size="sm" className="hover:bg-emerald-50">
+                <Button variant="outline" size="sm" className="hover:bg-emerald-50 text-emerald-600 border-emerald-200">
                   + Add Category
                 </Button>
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-3">Privacy Settings</h3>
+              <h3 className="font-semibold text-base mb-4">Privacy Settings</h3>
               <div className="space-y-3">
                 {[
                   { label: "Public Profile", key: "publicProfile" },
@@ -454,7 +274,7 @@ export default function Profile() {
                   { label: "SMS Notifications", key: "smsNotifications" },
                 ].map((item, index) => (
                   <div key={index} className="flex items-center justify-between">
-                    <span className="text-sm">{item.label}</span>
+                    <span className="text-sm font-medium text-gray-800">{item.label}</span>
                     <Switch
                       checked={preferences[item.key]}
                       onCheckedChange={() => togglePreference(item.key)}
@@ -468,14 +288,22 @@ export default function Profile() {
         </Card>
 
         {/* Social Media Links */}
-        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+          <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                <span className="text-white text-xs">🔗</span>
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                <span className="text-white text-sm">🔗</span>
               </div>
               Social Media Links
             </h2>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => (isEditing.social ? handleSave("social") : handleEdit("social"))}
+              className="hover:bg-emerald-50 text-emerald-600 border-emerald-200"
+            >
+              {isEditing.social ? <Save className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
+            </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {Object.entries(socialLinks).map(([platform, url]) => (
@@ -484,7 +312,7 @@ export default function Profile() {
                   <span className="text-emerald-600 text-sm font-bold">{platform.charAt(0).toUpperCase()}</span>
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium capitalize">{platform}</p>
+                  <p className="font-semibold text-sm capitalize">{platform}</p>
                   {isEditing.social ? (
                     <Input
                       value={url}
@@ -495,25 +323,17 @@ export default function Profile() {
                     <p className="text-sm text-gray-600 truncate">{url}</p>
                   )}
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleEdit("social")}
-                  className="hover:bg-emerald-100"
-                >
-                  <Edit className="w-4 h-4" />
-                </Button>
               </div>
             ))}
           </div>
         </Card>
 
         {/* Professional Information */}
-        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+          <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                <span className="text-white text-xs">💼</span>
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                <span className="text-white text-sm">💼</span>
               </div>
               Professional Information
             </h2>
@@ -521,7 +341,7 @@ export default function Profile() {
               variant="outline"
               size="sm"
               onClick={() => (isEditing.professional ? handleSave("professional") : handleEdit("professional"))}
-              className="hover:bg-emerald-50"
+              className="hover:bg-emerald-50 text-emerald-600 border-emerald-200"
             >
               {isEditing.professional ? <Save className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
             </Button>
@@ -534,7 +354,7 @@ export default function Profile() {
                 { label: "Department", field: "department" },
               ].map((item, index) => (
                 <div key={index}>
-                  <label className="text-sm text-gray-600">{item.label}</label>
+                  <label className="text-sm text-gray-600 font-medium">{item.label}</label>
                   {isEditing.professional ? (
                     <Input
                       value={profileData[item.field]}
@@ -542,7 +362,7 @@ export default function Profile() {
                       className="mt-1 focus:ring-emerald-500 focus:border-emerald-500"
                     />
                   ) : (
-                    <p className="font-medium">{profileData[item.field]}</p>
+                    <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                   )}
                 </div>
               ))}
@@ -553,7 +373,7 @@ export default function Profile() {
                 { label: "Work Location", field: "workLocation" },
               ].map((item, index) => (
                 <div key={index}>
-                  <label className="text-sm text-gray-600">{item.label}</label>
+                  <label className="text-sm text-gray-600 font-medium">{item.label}</label>
                   {isEditing.professional ? (
                     <Input
                       value={profileData[item.field]}
@@ -561,12 +381,12 @@ export default function Profile() {
                       className="mt-1 focus:ring-emerald-500 focus:border-emerald-500"
                     />
                   ) : (
-                    <p className="font-medium">{profileData[item.field]}</p>
+                    <p className="font-semibold text-gray-800 mt-1">{profileData[item.field]}</p>
                   )}
                 </div>
               ))}
               <div>
-                <label className="text-sm text-gray-600">Bio/Description</label>
+                <label className="text-sm text-gray-600 font-medium">Bio/Description</label>
                 {isEditing.professional ? (
                   <Textarea
                     value={profileData.bio}
@@ -575,7 +395,7 @@ export default function Profile() {
                     className="mt-1 focus:ring-emerald-500 focus:border-emerald-500"
                   />
                 ) : (
-                  <p className="text-sm text-gray-700">{profileData.bio}</p>
+                  <p className="text-sm text-gray-700 mt-1 leading-relaxed">{profileData.bio}</p>
                 )}
               </div>
             </div>
@@ -583,23 +403,23 @@ export default function Profile() {
         </Card>
 
         {/* Skills & Expertise */}
-        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+          <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                <span className="text-white text-xs">🎯</span>
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                <span className="text-white text-sm">🎯</span>
               </div>
               Skills & Expertise
             </h2>
           </div>
           <div className="space-y-6">
             <div>
-              <h3 className="font-medium mb-4">Technical Skills</h3>
+              <h3 className="font-semibold text-base mb-4">Technical Skills</h3>
               <div className="space-y-4">
                 {skills.map((skill, index) => (
                   <div key={index}>
                     <div className="flex justify-between mb-2">
-                      <span className="text-sm font-medium">{skill.name}</span>
+                      <span className="text-sm font-semibold text-gray-800">{skill.name}</span>
                       <span className="text-sm text-gray-600">{skill.level}%</span>
                     </div>
                     <Progress value={skill.level} className="h-2 bg-emerald-100" indicatorClassName="bg-emerald-500" />
@@ -608,7 +428,7 @@ export default function Profile() {
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-4">Certifications & Awards</h3>
+              <h3 className="font-semibold text-base mb-4">Certifications & Awards</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   { title: "Google UX Design Certificate", issuer: "Coursera • 2023", color: "emerald" },
@@ -619,7 +439,7 @@ export default function Profile() {
                       <Award className={`w-5 h-5 text-${cert.color}-600`} />
                     </div>
                     <div>
-                      <p className="font-medium">{cert.title}</p>
+                      <p className="font-semibold text-sm">{cert.title}</p>
                       <p className="text-sm text-gray-600">{cert.issuer}</p>
                     </div>
                   </div>
@@ -630,10 +450,10 @@ export default function Profile() {
         </Card>
 
         {/* Security Settings */}
-        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+          <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
                 <Shield className="w-4 h-4 text-white" />
               </div>
               Security Settings
@@ -641,7 +461,7 @@ export default function Profile() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium mb-4">Password & Authentication</h3>
+              <h3 className="font-semibold text-base mb-4">Password & Authentication</h3>
               <div className="space-y-4">
                 {[
                   { title: "Current Password", desc: "Last changed 3 months ago", action: "Change Password" },
@@ -650,7 +470,7 @@ export default function Profile() {
                 ].map((item, index) => (
                   <div key={index} className="flex items-center justify-between p-3 border rounded-lg hover:bg-emerald-50">
                     <div>
-                      <p className="font-medium">{item.title}</p>
+                      <p className="font-semibold text-sm">{item.title}</p>
                       <p className="text-sm text-gray-600">{item.desc}</p>
                     </div>
                     {item.type === "switch" ? (
@@ -660,7 +480,7 @@ export default function Profile() {
                         className="data-[state=checked]:bg-emerald-500"
                       />
                     ) : (
-                      <Button variant="outline" size="sm" className="hover:bg-emerald-50">
+                      <Button variant="outline" size="sm" className="hover:bg-emerald-50 text-emerald-600 border-emerald-200">
                         {item.action}
                       </Button>
                     )}
@@ -669,7 +489,7 @@ export default function Profile() {
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-4">Account Security</h3>
+              <h3 className="font-semibold text-base mb-4">Account Security</h3>
               <div className="space-y-4">
                 {[
                   { title: "Active Sessions", desc: "Manage your active sessions", action: "Manage" },
@@ -677,10 +497,14 @@ export default function Profile() {
                 ].map((item, index) => (
                   <div key={index} className="flex items-center justify-between p-3 border rounded-lg hover:bg-emerald-50">
                     <div>
-                      <p className="font-medium">{item.title}</p>
+                      <p className="font-semibold text-sm">{item.title}</p>
                       <p className="text-sm text-gray-600">{item.desc}</p>
                     </div>
-                    <Button variant={item.variant || "outline"} size="sm" className="hover:bg-emerald-50">
+                    <Button
+                      variant={item.variant || "outline"}
+                      size="sm"
+                      className={item.variant === "destructive" ? "hover:bg-red-600 text-white" : "hover:bg-emerald-50 text-emerald-600 border-emerald-200"}
+                    >
                       {item.action}
                     </Button>
                   </div>
@@ -691,15 +515,15 @@ export default function Profile() {
         </Card>
 
         {/* Recent Activity */}
-        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+          <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
                 <Activity className="w-4 h-4 text-white" />
               </div>
               Recent Activity
             </h2>
-            <Button variant="outline" size="sm" className="hover:bg-emerald-50">
+            <Button variant="outline" size="sm" className="hover:bg-emerald-50 text-emerald-600 border-emerald-200">
               View All Activity
             </Button>
           </div>
@@ -710,7 +534,7 @@ export default function Profile() {
                   <span>{activity.icon}</span>
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium">{activity.action}</p>
+                  <p className="font-semibold text-sm text-gray-800">{activity.action}</p>
                   <p className="text-sm text-gray-600">{activity.time}</p>
                 </div>
               </div>
@@ -720,54 +544,54 @@ export default function Profile() {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap justify-center gap-4 pt-6">
-          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button className=" bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
             <Save className="w-4 h-4 mr-2" />
             Save All Changes
           </Button>
-          <Button variant="outline" className="hover:bg-emerald-50">
+          <Button variant="outline" className="hover:bg-emerald-50 text-emerald-600 border-emerald-200 font-semibold">
             <X className="w-4 h-4 mr-2" />
             Discard Changes
           </Button>
-          <Button variant="outline" className="bg-orange-500 text-white hover:bg-orange-600">
+          <Button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
             <Upload className="w-4 h-4 mr-2" />
             Reset to Default
           </Button>
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-900 text-white p-6 rounded-xl mt-8">
+        <div className="bg-gray-900 text-white p-6 rounded-2xl shadow-lg mt-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <h3 className="font-semibold mb-2 flex items-center">
-                <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                  <span className="text-white text-xs">P</span>
+              <h3 className="font-semibold text-lg mb-3 flex items-center">
+                <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                  <span className="text-white text-sm">P</span>
                 </div>
                 ProfileHub
               </h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-300 leading-relaxed">
                 Manage your profile and security. Connect with your community. Continue your professional journey.
               </p>
             </div>
             <div>
-              <h4 className="font-medium mb-2">Quick Links</h4>
-              <ul className="text-sm text-gray-400 space-y-1">
-                <li>Help Center</li>
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
-                <li>Contact Us</li>
+              <h4 className="font-semibold text-base mb-3">Quick Links</h4>
+              <ul className="text-sm text-gray-300 space-y-2">
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Contact Us</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-2">Support</h4>
-              <ul className="text-sm text-gray-400 space-y-1">
-                <li>Documentation</li>
-                <li>Community</li>
-                <li>Security</li>
-                <li>Status</li>
+              <h4 className="font-semibold text-base mb-3">Support</h4>
+              <ul className="text-sm text-gray-300 space-y-2">
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Community</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Security</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Status</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-6 pt-4 text-center text-sm text-gray-400">
+          <div className="border-t border-gray-700 mt-6 pt-4 text-center text-sm text-gray-300">
             © 2024 ProfileHub. All rights reserved.
           </div>
         </div>

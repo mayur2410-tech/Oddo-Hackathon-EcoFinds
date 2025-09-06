@@ -1,17 +1,15 @@
 "use client"
 
 import React, { useState } from "react"
+import Navbar from "../LandingPage/components/Navbar"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 import {
-  Search,
-  ShoppingCart,
-  User,
-  Bell,
-  Menu,
-  X,
-  Heart,
   Package,
-  Store,
   DollarSign,
+  ShoppingCart,
   TrendingUp,
   Edit,
   Share,
@@ -21,167 +19,6 @@ import {
   AlertTriangle,
   CheckCircle,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-
-  const handleSearch = (e) => {
-    e.preventDefault()
-    console.log("Searching for:", searchQuery)
-  }
-
-  return (
-    <nav className="bg-gradient-to-r from-emerald-400 to-emerald-500 w-full">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-3">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:bg-white/20 rounded-full"
-                >
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64 bg-emerald-500 text-white">
-                <SheetHeader>
-                  <SheetTitle className="text-lg font-semibold text-white">
-                    EcoFind Menu
-                  </SheetTitle>
-                </SheetHeader>
-                <div className="mt-6 space-y-4">
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
-                    <Store className="h-5 w-5" />
-                    <span>Marketplace</span>
-                  </button>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
-                    <User className="h-5 w-5" />
-                    <span>Profile</span>
-                  </button>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
-                    <ShoppingCart className="h-5 w-5" />
-                    <span>Cart</span>
-                  </button>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
-                    <Heart className="h-5 w-5" />
-                    <span>Wishlist</span>
-                  </button>
-                  <div className="border-t border-white/40 my-2"></div>
-                  <button className="flex items-center space-x-3 text-white hover:text-emerald-100 w-full text-left">
-                    <Package className="h-5 w-5" />
-                    <span>Orders</span>
-                  </button>
-                </div>
-              </SheetContent>
-            </Sheet>
-            <h1 className="text-white text-2xl font-bold">EcoFind</h1>
-          </div>
-          <div className="hidden md:block flex-1 max-w-2xl mx-8">
-            <form onSubmit={handleSearch} className="relative">
-              <input
-                type="text"
-                placeholder="Search for apps - toys, gifts, idea, people"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 pr-12 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-emerald-300 text-gray-700"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white px-4 py-1.5 rounded-full transition-colors duration-200 hover:bg-emerald-700"
-              >
-                <Search className="h-4 w-4" />
-              </button>
-            </form>
-          </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="text-white hover:text-emerald-100 transition-colors duration-200 relative">
-              <Bell className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                3
-              </span>
-            </button>
-            <button className="text-white hover:text-emerald-100 transition-colors duration-200 relative">
-              <ShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                2
-              </span>
-            </button>
-            <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
-              <User className="h-5 w-5 text-white" />
-              <span className="text-white text-sm">Profile</span>
-            </div>
-          </div>
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white hover:text-emerald-100 transition-colors duration-200"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-        <div className="md:hidden pb-4">
-          <form onSubmit={handleSearch} className="relative">
-            <input
-              type="text"
-              placeholder="Search for apps - toys, gifts, idea, people"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 pr-12 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-emerald-300 text-gray-700"
-            />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white px-4 py-1.5 rounded-full transition-colors duration-200 hover:bg-emerald-700"
-            >
-              <Search className="h-4 w-4" />
-            </button>
-          </form>
-        </div>
-        {isMenuOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
-              <button className="flex items-center space-x-2 text-white hover:text-emerald-100 transition-colors duration-200">
-                <Bell className="h-5 w-5" />
-                <span>Notifications</span>
-                <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  3
-                </span>
-              </button>
-              <button className="flex items-center space-x-2 text-white hover:text-emerald-100 transition-colors duration-200">
-                <ShoppingCart className="h-5 w-5" />
-                <span>Cart</span>
-                <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  2
-                </span>
-              </button>
-              <button className="flex items-center space-x-2 text-white hover:text-emerald-100 transition-colors duration-200">
-                <User className="h-5 w-5" />
-                <span>Profile</span>
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
-  )
-}
 
 export default function MarketPlace() {
   const [activeTab, setActiveTab] = useState("all")
@@ -378,55 +215,57 @@ export default function MarketPlace() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       <Navbar />
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Header */}
-        <Card className="p-6 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white shadow-lg rounded-xl">
+        <Card className="p-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-xl rounded-2xl">
           <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold flex items-center">
                 <Package className="w-8 h-8 mr-3" />
                 MarketPlace
               </h1>
-              <p className="text-white/90 mt-1 text-lg">Manage your products and sales</p>
+              <p className="text-white/90 mt-2 text-lg">Manage your products and boost your sales</p>
             </div>
-            <Button onClick={handleAddProduct} className="bg-white text-emerald-600 hover:bg-gray-100 mt-4 sm:mt-0">
-              <Plus className="w-4 h-4 mr-2" />
+            <Button onClick={handleAddProduct} className="bg-white text-emerald-600 hover:bg-gray-100 mt-4 sm:mt-0 font-semibold">
+              <Plus className="w-5 h-5 mr-2" />
               Add Product
             </Button>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-3 mb-6">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  activeTab === tab.id ? "bg-white text-emerald-600" : "text-white/80 hover:text-white hover:bg-white/10"
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? "bg-white text-emerald-600 shadow-md"
+                    : "text-white/80 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {tab.label}
-                {tab.count !== null && <span className="ml-2 text-xs">{tab.count}</span>}
+                {tab.count !== null && <span className="ml-2 text-xs font-semibold">{tab.count}</span>}
               </button>
             ))}
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
               { icon: Package, label: "Total Products", value: stats.totalProducts },
               { icon: DollarSign, label: "Total Revenue", value: `$${stats.totalRevenue.toLocaleString()}` },
               { icon: ShoppingCart, label: "Total Orders", value: stats.totalOrders },
-              { icon: TrendingUp, label: "Average Order", value: `$${stats.averageOrder}` },
+              { icon: TrendingUp, label: "Avg. Order", value: `$${stats.averageOrder}` },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center bg-white/10 p-4 rounded-lg">
                 <div className="flex items-center justify-center space-x-2">
-                  <stat.icon className="w-5 h-5" />
+                  <stat.icon className="w-6 h-6 text-emerald-200" />
                   <span className="text-2xl font-bold">{stat.value}</span>
                 </div>
-                <p className="text-white/80 text-sm">{stat.label}</p>
+                <p className="text-white/80 text-sm mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -435,22 +274,24 @@ export default function MarketPlace() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow rounded-xl">
+            <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 rounded-2xl bg-white">
               <div className="relative">
                 <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-48 object-cover" />
                 <Badge
-                  className={`absolute top-2 right-2 ${product.status === "active" ? "bg-emerald-500" : "bg-gray-500"} text-white`}
+                  className={`absolute top-3 right-3 text-sm font-medium ${
+                    product.status === "active" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-gray-500 hover:bg-gray-600"
+                  } text-white`}
                 >
                   {product.status}
                 </Badge>
               </div>
-              <div className="p-4">
+              <div className="p-5">
                 {isEditing[product.id] ? (
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Input
                       value={product.name}
                       onChange={(e) => updateProduct(product.id, "name", e.target.value)}
-                      className="font-medium focus:ring-emerald-500 focus:border-emerald-500"
+                      className="font-semibold text-base focus:ring-emerald-500 focus:border-emerald-500"
                     />
                     <Input
                       type="number"
@@ -461,8 +302,8 @@ export default function MarketPlace() {
                   </div>
                 ) : (
                   <>
-                    <h3 className="font-medium text-sm mb-2 line-clamp-2">{product.name}</h3>
-                    <p className="text-lg font-bold text-emerald-600 mb-2">${product.price}</p>
+                    <h3 className="font-semibold text-base mb-2 line-clamp-2 leading-tight">{product.name}</h3>
+                    <p className="text-xl font-bold text-emerald-600 mb-3">${product.price}</p>
                   </>
                 )}
                 <div className="flex items-center space-x-1 mb-3">
@@ -470,45 +311,45 @@ export default function MarketPlace() {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-3 h-3 ${
+                        className={`w-4 h-4 ${
                           i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-xs text-gray-600">({product.reviews})</span>
+                  <span className="text-xs text-gray-500">({product.reviews})</span>
                 </div>
-                <div className="flex items-center justify-between mb-3">
-                  <Badge variant="secondary" className="text-xs bg-emerald-100 text-emerald-800">
+                <div className="flex items-center justify-between mb-4">
+                  <Badge variant="secondary" className="text-xs bg-emerald-100 text-emerald-800 font-medium">
                     {product.category}
                   </Badge>
-                  <span className="text-xs text-gray-600">Stock: {product.stock}</span>
+                  <span className="text-xs text-gray-500 font-medium">Stock: {product.stock}</span>
                 </div>
                 <div className="flex space-x-2">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="flex-1 bg-transparent hover:bg-emerald-50"
+                    className="flex-1 bg-transparent hover:bg-emerald-50 text-emerald-600 border-emerald-200"
                     onClick={() => handleEdit(product.id)}
                   >
-                    <Edit className="w-3 h-3 mr-1" />
-                    Edit
+                    <Edit className="w-4 h-4 mr-1" />
+                    {isEditing[product.id] ? "Save" : "Edit"}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
-                    className="hover:bg-emerald-50"
+                    className="hover:bg-emerald-50 text-emerald-600 border-emerald-200"
                     onClick={() => handleShare(product)}
                   >
-                    <Share className="w-3 h-3" />
+                    <Share className="w-4 h-4" />
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
-                    className="hover:bg-red-50"
+                    className="hover:bg-red-50 text-red-600 border-red-200"
                     onClick={() => handleDelete(product.id)}
                   >
-                    <Trash2 className="w-3 h-3" />
+                    <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
@@ -518,26 +359,26 @@ export default function MarketPlace() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent Activity */}
-          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+            <div className="flex items-center justify-between mb-5">
               <h2 className="text-xl font-semibold flex items-center">
-                <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                  <span className="text-white text-xs">📋</span>
+                <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                  <span className="text-white text-sm">📋</span>
                 </div>
                 Recent Activity
               </h2>
-              <Button variant="outline" size="sm" className="hover:bg-emerald-50">
+              <Button variant="outline" size="sm" className="hover:bg-emerald-50 text-emerald-600 border-emerald-200">
                 View All
               </Button>
             </div>
             <div className="space-y-4">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-start space-x-3 p-3 hover:bg-emerald-50 rounded-lg">
-                  <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span>{activity.icon}</span>
+                <div key={index} className="flex items-start space-x-3 p-3 hover:bg-emerald-50 rounded-lg transition-colors">
+                  <div className="w-9 h-9 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg">{activity.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm">{activity.action}</p>
+                    <p className="font-semibold text-sm text-gray-800">{activity.action}</p>
                     {activity.description && <p className="text-xs text-gray-600 mt-1">{activity.description}</p>}
                     <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
                   </div>
@@ -547,43 +388,45 @@ export default function MarketPlace() {
           </Card>
 
           {/* Performance Insights */}
-          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow rounded-xl">
-            <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                <span className="text-white text-xs">📊</span>
+          <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-2xl bg-white">
+            <h2 className="text-xl font-semibold mb-5 flex items-center">
+              <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                <span className="text-white text-sm">📊</span>
               </div>
               Performance Insights
             </h2>
             <div className="space-y-6">
               <div>
-                <div className="flex items-center space-x-2 mb-3">
-                  <TrendingUp className="w-4 h-4 text-emerald-600" />
-                  <h3 className="font-medium">Top Selling</h3>
+                <div className="flex items-center space-x-2 mb-4">
+                  <TrendingUp className="w-5 h-5 text-emerald-600" />
+                  <h3 className="font-semibold text-base">Top Selling</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {performanceInsights.topSelling.map((item, index) => (
                     <div key={index} className="flex items-center justify-between text-sm">
-                      <span className="truncate">{item.name}</span>
+                      <span className="truncate font-medium text-gray-800">{item.name}</span>
                       <div className="flex items-center space-x-2">
-                        <span className="font-medium">{item.sales}</span>
-                        <TrendingUp className={`w-3 h-3 ${item.trend === "up" ? "text-emerald-500" : "text-gray-500"}`} />
+                        <span className="font-semibold">{item.sales}</span>
+                        <TrendingUp className={`w-4 h-4 ${item.trend === "up" ? "text-emerald-500" : "text-gray-400"}`} />
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <div className="flex items-center space-x-2 mb-3">
-                  <AlertTriangle className="w-4 h-4 text-orange-600" />
-                  <h3 className="font-medium">Need Attention</h3>
+                <div className="flex items-center space-x-2 mb-4">
+                  <AlertTriangle className="w-5 h-5 text-orange-600" />
+                  <h3 className="font-semibold text-base">Need Attention</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {performanceInsights.needAttention.map((item, index) => (
                     <div key={index} className="flex items-center justify-between text-sm">
-                      <span>{item.name}</span>
+                      <span className="font-medium text-gray-800">{item.name}</span>
                       <Badge
                         variant={item.type === "warning" ? "destructive" : "secondary"}
-                        className={`text-xs ${item.type === "warning" ? "bg-red-500" : "bg-emerald-100 text-emerald-800"}`}
+                        className={`text-xs font-semibold ${
+                          item.type === "warning" ? "bg-red-500 hover:bg-red-600" : "bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                        }`}
                       >
                         {item.count}
                       </Badge>
@@ -592,17 +435,17 @@ export default function MarketPlace() {
                 </div>
               </div>
               <div>
-                <div className="flex items-center space-x-2 mb-3">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
-                  <h3 className="font-medium">Quick Actions</h3>
+                <div className="flex items-center space-x-2 mb-4">
+                  <CheckCircle className="w-5 h-5 text-emerald-600" />
+                  <h3 className="font-semibold text-base">Quick Actions</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {performanceInsights.quickActions.map((action, index) => (
                     <Button
                       key={index}
                       variant="outline"
                       size="sm"
-                      className="w-full justify-start bg-transparent hover:bg-emerald-50"
+                      className="w-full justify-start bg-transparent hover:bg-emerald-50 text-emerald-600 border-emerald-200 font-semibold"
                     >
                       <action.icon className="w-4 h-4 mr-2" />
                       {action.name}
@@ -615,40 +458,40 @@ export default function MarketPlace() {
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-900 text-white p-6 rounded-xl">
+        <div className="bg-gray-900 text-white p-6 rounded-2xl shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <h3 className="font-semibold mb-2 flex items-center">
-                <div className="w-6 h-6 bg-emerald-500 rounded mr-2 flex items-center justify-center">
-                  <Package className="w-4 h-4" />
+              <h3 className="font-semibold text-lg mb-3 flex items-center">
+                <div className="w-7 h-7 bg-emerald-500 rounded-full mr-2 flex items-center justify-center">
+                  <Package className="w-4 h-4 text-white" />
                 </div>
                 MarketPlace
               </h3>
-              <p className="text-sm text-gray-400">
-                Powerful e-commerce management system. Manage products and track sales with ease.
+              <p className="text-sm text-gray-300 leading-relaxed">
+                Streamline your e-commerce with powerful tools to manage products and track sales effortlessly.
               </p>
             </div>
             <div>
-              <h4 className="font-medium mb-2">Quick Links</h4>
-              <ul className="text-sm text-gray-400 space-y-1">
-                <li>Help Center</li>
-                <li>Documentation</li>
-                <li>API Reference</li>
-                <li>Contact Support</li>
+              <h4 className="font-semibold text-base mb-3">Quick Links</h4>
+              <ul className="text-sm text-gray-300 space-y-2">
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">API Reference</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Contact Support</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-2">Support</h4>
-              <ul className="text-sm text-gray-400 space-y-1">
-                <li>Community</li>
-                <li>Security</li>
-                <li>Terms of Service</li>
-                <li>Privacy Policy</li>
+              <h4 className="font-semibold text-base mb-3">Support</h4>
+              <ul className="text-sm text-gray-300 space-y-2">
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Community</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Security</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-emerald-300 transition-colors">Privacy Policy</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-6 pt-4 text-center text-sm text-gray-400">
-            © 2024 MarketPlace. All rights reserved. Made with ❤️ by developers.
+          <div className="border-t border-gray-700 mt-6 pt-4 text-center text-sm text-gray-300">
+            © 2024 MarketPlace. All rights reserved. Crafted with ❤️ by developers.
           </div>
         </div>
       </div>
